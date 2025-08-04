@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,301,701,300,501,401,901,400&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sansita:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Satoshi', sans-serif;
+            background-color: white;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .logo {
+            height: 245px;
+            width: auto;
+            max-width: 90vw;
+            object-fit: contain;
+            margin-bottom: 30px;
+        }
+
+        .logo:hover {
+            /* No hover effect */
+        }
+
+        .coming-soon-text {
+            font-size: 40px;
+            font-weight: bold;
+            color: #1230ec;
+            letter-spacing: 1px;
+            position: relative;
+            background: linear-gradient(45deg, #1230ec, #4169E1, #1230ec);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1.5s ease-out, gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .logo {
+                height: 180px;
+                margin-bottom: 25px;
+            }
+            
+            .coming-soon-text {
+                font-size: 28px;
+                letter-spacing: 1px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                height: 150px;
+                margin-bottom: 20px;
+            }
+            
+            .coming-soon-text {
+                font-size: 24px;
+                letter-spacing: 0.5px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .logo {
+                height: 120px;
+                margin-bottom: 15px;
+            }
+            
+            .coming-soon-text {
+                font-size: 20px;
+                letter-spacing: 0px;
+            }
+        }
+
+        /* Preload optimization */
+        .logo {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        /* Loading animation for the image */
+        .logo.loading {
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+
+        .logo.loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img 
+            class="logo loading" 
+            src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3BnYXZ6OTJoc3Z3ejJ0OHRpcDJsZTEycTR0aG1pam14bXRjdGNqbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/FyjguBhrzcJ9p7ja6h/giphy.gif" 
+            alt="Animated Logo"
+            onload="this.classList.remove('loading'); this.classList.add('loaded');"
+            onerror="this.style.display='none';"
+        >
+        <div class="coming-soon-text">coming soon</div>
+    </div>
+
+    <script>
+        // Preload the GIF for better performance
+        const img = new Image();
+        img.src = "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3BnYXZ6OTJoc3Z3ejJ0OHRpcDJsZTEycTR0aG1pam14bXRjdGNqbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/FyjguBhrzcJ9p7ja6h/giphy.gif";
+        
+        // Prevent right-click context menu on images for cleaner experience
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
+
+        // Disable zoom on mobile
+        document.addEventListener('touchstart', function(event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        });
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>
